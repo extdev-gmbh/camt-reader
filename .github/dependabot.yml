@@ -1,0 +1,13 @@
+# Update proposals for every pinned input of the build: the tools in pyproject.toml and the
+# commit SHAs of the GitHub Actions. A signal only: updates are taken over through the
+# maintainers' own repository, a release publishes the result here.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

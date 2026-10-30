@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "camt-reader"
+dynamic = ["version"]
+description = "Read ISO 20022 camt.052/camt.053 bank statements (also ZIP and CSV-CAMT) into a neutral model."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.12"
+dependencies = []
+keywords = ["camt", "camt.053", "camt.052", "iso20022", "bank statement", "sepa"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/extdev-gmbh/camt-reader"
+Changelog = "https://github.com/extdev-gmbh/camt-reader/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "hypothesis==6.170.14",
+    "mypy==2.4.1",
+    "pip-audit==2.10.1",
+    "pytest==9.2.0",
+    "ruff==0.17.3",
+]
+release = [
+    "build==1.6.1",
+    "cyclonedx-bom==7.6.0",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "camt_reader.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+camt_reader = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 132
+target-version = "py312"
+extend-exclude = ["scripts/make_fints2camt_fixture.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106", "S603", "S607"]
+"ci/*" = ["S603", "S607", "S202"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["camt_reader"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["src"]

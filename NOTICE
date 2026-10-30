@@ -1,0 +1,6 @@
+camt-reader
+Copyright 2026 ext.dev GmbH
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+camt-reader has no runtime dependencies: it uses the Python standard library only.
